@@ -18,6 +18,16 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  // Fungsi untuk menampilkan Snackbar
+  void showBiodataSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,114 +39,121 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // Widget 1: Card dengan Text
+            // Widget 1: Nama sebagai tombol
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                leading: Icon(Icons.text_fields, color: Colors.blue),
-                title: Text(
-                  'Widget 1: Ini adalah widget Text',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text('Menampilkan teks biasa.'),
-              ),
-            ),
-            SizedBox(height: 10),
-
-            // Widget 2: ElevatedButton dengan style
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.touch_app, color: Colors.green),
-                title: ElevatedButton(
+                leading: Icon(Icons.person, color: Colors.blue),
+                title: TextButton(
                   onPressed: () {
-                    // Aksi ketika tombol ditekan
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('ElevatedButton ditekan!')));
+                    showBiodataSnackBar(context, 'Nama: Akmal AdiCandra');
                   },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                  child: Text(
+                    'Nama: Akmal AdiCandra',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  child: Text('Widget 2: Tekan saya!'),
                 ),
-                subtitle: Text('Tombol dengan aksi Snackbar.'),
+                subtitle:
+                    Text('Menampilkan nama sebagai tombol yang bisa diklik.'),
               ),
             ),
             SizedBox(height: 10),
 
-            // Widget 3: Image dengan border radius
+            // Widget 2: NIM sebagai tombol
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                leading: Icon(Icons.image, color: Colors.red),
-                title: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    'https://asset-a.grid.id//crop/0x0:0x0/700x465/photo/2023/03/09/dongeng-anak-bebek-bebek-mendon-20230309052944.jpg',
-                    height: 100,
+                leading: Icon(Icons.badge, color: Colors.green),
+                title: TextButton(
+                  onPressed: () {
+                    showBiodataSnackBar(context, 'NIM: 2211104059');
+                  },
+                  child: Text(
+                    'NIM: 2211104059',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
-                subtitle: Text('Widget 3: Gambar dari URL.'),
+                subtitle:
+                    Text('Menampilkan NIM sebagai tombol yang bisa diklik.'),
               ),
             ),
             SizedBox(height: 10),
 
-            // Widget 4: Icon dengan deskripsi
+            // Widget 3: Program Studi sebagai tombol
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
               child: ListTile(
-                leading: Icon(Icons.star, color: Colors.orange),
-                title: Text(
-                  'Widget 4: Ikon Bintang',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text('Menampilkan ikon bintang dengan warna oranye.'),
-              ),
-            ),
-            SizedBox(height: 10),
-
-            // Widget 5: Container dengan style
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.crop_square, color: Colors.purple),
-                title: Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Widget 5: Kotak Biru',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
+                leading: Icon(Icons.school, color: Colors.orange),
+                title: TextButton(
+                  onPressed: () {
+                    showBiodataSnackBar(
+                        context, 'Program Studi: Rekayasa Perangkat Lunak');
+                  },
+                  child: Text(
+                    'Program Studi: Rekayasa Perangkat Lunak',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 subtitle: Text(
-                    'Container dengan latar belakang biru dan teks putih.'),
+                    'Menampilkan Program Studi sebagai tombol yang bisa diklik.'),
               ),
             ),
             SizedBox(height: 10),
+
+            // Widget 4: Alamat sebagai tombol
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.home, color: Colors.red),
+                title: TextButton(
+                  onPressed: () {
+                    showBiodataSnackBar(context, 'Alamat: Jalan Tanjlig');
+                  },
+                  child: Text(
+                    'Alamat: Jalan Tanjlig',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                subtitle:
+                    Text('Menampilkan alamat sebagai tombol yang bisa diklik.'),
+              ),
+            ),
+            SizedBox(height: 10),
+
+            // Widget 5: Hobi sebagai tombol
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.sports_soccer, color: Colors.purple),
+                title: TextButton(
+                  onPressed: () {
+                    showBiodataSnackBar(context, 'Hobi: Main Johnson Mid');
+                  },
+                  child: Text(
+                    'Hobi: Main Johnson Mid',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                subtitle:
+                    Text('Menampilkan hobi sebagai tombol yang bisa diklik.'),
+              ),
+            ),
+            SizedBox(height: 20),
 
             // Widget 6: Checkbox dengan style
             Card(
@@ -164,7 +181,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
 
-            // Widget 7: Switch dengan style
+            // Widget 7: Switch dengan style (Tidak diubah)
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
