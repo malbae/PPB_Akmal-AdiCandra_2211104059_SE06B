@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,204 +9,312 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '7 Widgets Example',
+      debugShowCheckedModeBanner: false,
+      title: 'Profile',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        fontFamily: 'Roboto',
+        primarySwatch: Colors.blueGrey,
+        textTheme: TextTheme(
+          titleLarge: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+          titleMedium: TextStyle(
+            fontSize: 16,
+            color: Colors.grey[500],
+            fontWeight: FontWeight.w400,
+          ),
+          bodyLarge: TextStyle(fontSize: 14, color: Colors.grey[700]),
+          bodySmall: TextStyle(fontSize: 12, color: Colors.grey[500]),
+        ),
       ),
-      home: HomeScreen(),
+      home: ProfileScreen(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-  // Fungsi untuk menampilkan Snackbar
-  void showBiodataSnackBar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
-
+class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        title: Text('LAPRAK 2211104059'),
+        backgroundColor: Colors.blueGrey[700],
+        elevation: 0,
+        title: Text('Profil'),
         centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        leading: Icon(Icons.arrow_back_ios, color: Colors.white),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            // Widget 1: Nama sebagai tombol
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.person, color: Colors.blue),
-                title: TextButton(
-                  onPressed: () {
-                    showBiodataSnackBar(context, 'Nama: Akmal AdiCandra');
-                  },
-                  child: Text(
-                    'Nama: Akmal AdiCandra',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            // Header Background
+            Container(
+              height: 180,
+              color: Colors.blueGrey[700],
+              child: Center(
+                child: CircleAvatar(
+                  radius: 55,
+                  backgroundColor: Colors.white,
+                  backgroundImage: NetworkImage(
+                    'https://3.bp.blogspot.com/-Jv3P7sKT4vc/VSed0F_2NeI/AAAAAAAAALE/7apsl216e2Q/s1600/bayi%2Blucu%2B8.jpg', // Ganti URL sesuai gambar profil
                   ),
                 ),
-                subtitle:
-                    Text('Menampilkan nama sebagai tombol yang bisa diklik.'),
               ),
             ),
             SizedBox(height: 10),
-
-            // Widget 2: NIM sebagai tombol
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.badge, color: Colors.green),
-                title: TextButton(
-                  onPressed: () {
-                    showBiodataSnackBar(context, 'NIM: 2211104059');
-                  },
-                  child: Text(
-                    'NIM: 2211104059',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            // Username and Location
+            Text(
+              'Akmal AdiCandra',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
                   ),
-                ),
-                subtitle:
-                    Text('Menampilkan NIM sebagai tombol yang bisa diklik.'),
-              ),
             ),
-            SizedBox(height: 10),
-
-            // Widget 3: Program Studi sebagai tombol
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.school, color: Colors.orange),
-                title: TextButton(
-                  onPressed: () {
-                    showBiodataSnackBar(
-                        context, 'Program Studi: Rekayasa Perangkat Lunak');
-                  },
-                  child: Text(
-                    'Program Studi: Rekayasa Perangkat Lunak',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              'Purwokerto | Joined September 2024',
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontSize: 14,
+                    color: Colors.grey[600],
                   ),
-                ),
-                subtitle: Text(
-                    'Menampilkan Program Studi sebagai tombol yang bisa diklik.'),
-              ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 12),
 
-            // Widget 4: Alamat sebagai tombol
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.home, color: Colors.red),
-                title: TextButton(
-                  onPressed: () {
-                    showBiodataSnackBar(context, 'Alamat: Jalan Tanjlig');
-                  },
-                  child: Text(
-                    'Alamat: Jalan Tanjlig',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                subtitle:
-                    Text('Menampilkan alamat sebagai tombol yang bisa diklik.'),
-              ),
-            ),
-            SizedBox(height: 10),
-
-            // Widget 5: Hobi sebagai tombol
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.sports_soccer, color: Colors.purple),
-                title: TextButton(
-                  onPressed: () {
-                    showBiodataSnackBar(context, 'Hobi: Main Johnson Mid');
-                  },
-                  child: Text(
-                    'Hobi: Main Johnson Mid',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                subtitle:
-                    Text('Menampilkan hobi sebagai tombol yang bisa diklik.'),
+            // Bio
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Text(
+                'CEO Riverstreet, Because your satisfaction is everything & Standing out from the rest, and that’s what we want you to be as well.',
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      height: 1.4,
+                      fontSize: 15,
+                    ),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(height: 20),
 
-            // Widget 6: Checkbox dengan style
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.check_box, color: Colors.teal),
-                title: Row(
-                  children: [
-                    Checkbox(
-                      value: true,
-                      onChanged: (bool? value) {},
-                      activeColor: Colors.teal,
+            // Buttons: Follow, Message, More
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 48, 60, 66)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                          EdgeInsets.symmetric(vertical: 12),
+                        ),
+                      ),
+                      onPressed: () {
+                        // Aksi Follow
+                      },
+                      child: Text(
+                        'Follow',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text('Widget 6: Checkbox yang dipilih'),
+                  ),
+                  SizedBox(width: 15),
+                  Expanded(
+                    child: OutlinedButton(
+                      style: ButtonStyle(
+                        side: MaterialStateProperty.all(
+                          BorderSide(color: Colors.blueGrey[700]!, width: 2),
+                        ),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                          EdgeInsets.symmetric(vertical: 12),
+                        ),
+                      ),
+                      onPressed: () {
+                        // Aksi Message
+                      },
+                      child: Text(
+                        'Message',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blueGrey[700],
+                        ),
+                      ),
                     ),
-                  ],
-                ),
-                subtitle: Text('Kotak centang yang dipilih.'),
+                  ),
+                  SizedBox(width: 15),
+                  Container(
+                    height: 45,
+                    width: 45,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: IconButton(
+                      icon: Icon(Icons.more_horiz, color: Colors.black),
+                      onPressed: () {
+                        // Aksi More
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 10),
 
-            // Widget 7: Switch dengan style (Tidak diubah)
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: ListTile(
-                leading: Icon(Icons.toggle_on, color: Colors.blue),
-                title: Row(
-                  children: [
-                    Switch(
-                      value: true,
-                      onChanged: (bool value) {},
-                      activeColor: Colors.blue,
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text('Widget 7: Switch Aktif'),
+            SizedBox(height: 20),
+
+            // Information Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
                     ),
                   ],
                 ),
-                subtitle: Text('Tombol sakelar yang aktif.'),
+                child: Column(
+                  children: [
+                    InfoItem(
+                      icon: Icons.language,
+                      label: 'Website',
+                      value: 'www.riverstreet.com',
+                    ),
+                    Divider(thickness: 1, indent: 15, endIndent: 15),
+                    InfoItem(
+                      icon: Icons.email,
+                      label: 'Email',
+                      value: 'akmal67e@gmail.com',
+                    ),
+                    Divider(thickness: 1, indent: 15, endIndent: 15),
+                    InfoItem(
+                      icon: Icons.phone,
+                      label: 'Phone',
+                      value: '+62 878 238 782 518',
+                    ),
+                    Divider(thickness: 1, indent: 15, endIndent: 15),
+                    InfoItem(
+                      icon: Icons.calendar_today,
+                      label: 'Joined',
+                      value: '26 September, 2024',
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Skills with Box Border
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: Colors.blueGrey, width: 1),
+                ),
+                child: Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    SkillTag('UI Designer'),
+                    SkillTag('UX Designer'),
+                    SkillTag('Design System'),
+                    SkillTag('Product'),
+                    SkillTag('Successful'),
+                  ],
+                ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class InfoItem extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  InfoItem({required this.icon, required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.blueGrey[700], size: 28),
+          SizedBox(width: 15),
+          Text(
+            '$label:',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: Colors.black,
+            ),
+          ),
+          Spacer(),
+          Text(
+            value,
+            style: TextStyle(fontSize: 15, color: Colors.black87),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SkillTag extends StatelessWidget {
+  final String label;
+
+  SkillTag(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.blueGrey.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.blueGrey),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: Colors.blueGrey[700],
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
