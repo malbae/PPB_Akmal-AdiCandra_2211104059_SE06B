@@ -46,12 +46,60 @@ class _MyDbViewState extends State<MyDbView> {
       await _dbHelper.update({
         'id': _selectedId, // ID yang dipilih untuk diperbarui
         'title': _titleController.text,
-        'description': _descriptionController.text,
+        'description': _titleController.text,
       });
       _titleController.clear();
       _descriptionController.clear();
       _refreshData(); // Refresh data setelah memperbarui
     }
+  }
+
+  // Method untuk menghapus data dari database
+  Future<void> _deleteData(int id) async {
+    await _dbHelper.delete(id);
+    _refreshData(); // Refresh data setelah menghapus
+  }
+
+  // Method untuk menampilkan dialog edit data
+  void _showEditDialog(Map<String, dynamic> item) {
+    _selectedId = item['id'];
+    _titleController.text = item['title'];
+    _descriptionController.text = item['description'];
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Edit Data'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _titleController,
+              decoration: const InputDecoration(labelText: 'Title'),
+            ),
+            TextField(
+              controller: _descriptionController,
+              decoration: const InputDecoration(labelText: 'Description'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Tutup dialog
+            },
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _updateData();
+              Navigator.pop(context); // Tutup dialog
+            },
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -98,15 +146,18 @@ class _MyDbViewState extends State<MyDbView> {
                           child: ListTile(
                             title: Text(item['title']),
                             subtitle: Text(item['description']),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.edit),
-                              onPressed: () {
-                                setState(() {
-                                  _selectedId = item['id']; // Set ID untuk update
-                                  _titleController.text = item['title'];
-                                  _descriptionController.text = item['description'];
-                                });
-                              },
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () => _showEditDialog(item),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () => _deleteData(item['id']),
+                                ),
+                              ],
                             ),
                           ),
                         );
