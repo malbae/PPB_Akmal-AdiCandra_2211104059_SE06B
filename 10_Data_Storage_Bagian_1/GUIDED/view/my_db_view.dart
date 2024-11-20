@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../db/db_helper.dart';
 
 class MyDbView extends StatefulWidget {
@@ -27,7 +28,8 @@ class _MyDbViewState extends State<MyDbView> {
 
   // Menambahkan data baru
   Future<void> _addData() async {
-    if (_titleController.text.isNotEmpty && _descriptionController.text.isNotEmpty) {
+    if (_titleController.text.isNotEmpty &&
+        _descriptionController.text.isNotEmpty) {
       await _dbHelper.insert({
         'title': _titleController.text,
         'description': _descriptionController.text,
@@ -40,7 +42,8 @@ class _MyDbViewState extends State<MyDbView> {
 
   // Memperbarui data
   Future<void> _updateData(int id) async {
-    if (_titleController.text.isNotEmpty && _descriptionController.text.isNotEmpty) {
+    if (_titleController.text.isNotEmpty &&
+        _descriptionController.text.isNotEmpty) {
       await _dbHelper.update({
         'id': id,
         'title': _titleController.text,
@@ -126,7 +129,9 @@ class _MyDbViewState extends State<MyDbView> {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: _selectedId == null ? _addData : () => _updateData(_selectedId!),
+              onPressed: _selectedId == null
+                  ? _addData
+                  : () => _updateData(_selectedId!),
               child: Text(_selectedId == null ? 'Add Data' : 'Update Data'),
             ),
             const SizedBox(height: 16),
