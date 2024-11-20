@@ -69,7 +69,7 @@ class _MyDbViewState extends State<MyDbView> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Edit Data'),
+        title: const Text('Edit Item'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
