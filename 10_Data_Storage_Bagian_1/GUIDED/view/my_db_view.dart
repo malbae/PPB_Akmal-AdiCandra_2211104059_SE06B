@@ -39,20 +39,18 @@ class _MyDbViewState extends State<MyDbView> {
   }
 
   // Method untuk memperbarui data di database
-  Future<void> _updateData() async {
-    if (_selectedId != null &&
-        _titleController.text.isNotEmpty &&
-        _descriptionController.text.isNotEmpty) {
-      await _dbHelper.update({
-        'id': _selectedId, // ID yang dipilih untuk diperbarui
-        'title': _titleController.text,
-        'description': _titleController.text,
-      });
-      _titleController.clear();
-      _descriptionController.clear();
-      _refreshData(); // Refresh data setelah memperbarui
-    }
+  Future<void> _updateData(int id) async {
+  if (_titleController.text.isNotEmpty && _descriptionController.text.isNotEmpty) {
+    await _dbHelper.update({
+      'id': id, // ID dari parameter
+      'title': _titleController.text,
+      'description': _descriptionController.text,
+    });
+    _titleController.clear();
+    _descriptionController.clear();
+    _refreshData(); // Refresh data setelah memperbarui
   }
+}
 
   // Method untuk menghapus data dari database
   Future<void> _deleteData(int id) async {
@@ -86,20 +84,20 @@ class _MyDbViewState extends State<MyDbView> {
           ],
         ),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context); // Tutup dialog
-            },
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              _updateData();
-              Navigator.pop(context); // Tutup dialog
-            },
-            child: const Text('Save'),
-          ),
-        ],
+  TextButton(
+    onPressed: () {
+      Navigator.pop(context); // Tutup dialog
+    },
+    child: const Text('Cancel'),
+  ),
+  ElevatedButton(
+    onPressed: () {
+      _updateData(item['id']); // Tambahkan ID item yang diupdate
+      Navigator.pop(context); // Tutup dialog setelah update
+    },
+    child: const Text('Save'),
+  ),
+],
       ),
     );
   }
