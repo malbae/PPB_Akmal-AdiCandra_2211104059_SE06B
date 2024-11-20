@@ -24,7 +24,7 @@ class _MyDbViewState extends State<MyDbView> \{\
   \}\
 \
   // Method untuk menyimpan data ke database\
-  Future<void> _saveData() async \{\
+  Future<void> _addData() async \{\
     if (_titleController.text.isNotEmpty && _descriptionController.text.isNotEmpty) \{\
       await _dbHelper.insert(\{\
         'title': _titleController.text,\
@@ -63,7 +63,7 @@ class _MyDbViewState extends State<MyDbView> \{\
             ),\
             const SizedBox(height: 16),\
             ElevatedButton(\
-              onPressed: _saveData,\
+              onPressed: _addData,\
               child: const Text('Save Data'),\
             ),\
             const SizedBox(height: 16),\
