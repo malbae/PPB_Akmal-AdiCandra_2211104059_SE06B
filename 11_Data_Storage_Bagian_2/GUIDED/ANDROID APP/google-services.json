@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "204651033466",
+    "project_id": "fir-praktikum-68b0a",
+    "storage_bucket": "fir-praktikum-68b0a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204651033466:android:45e1275f20a566566b9cc3",
+        "android_client_info": {
+          "package_name": "com.example.pertemuan11"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQuGsxITtliOQLvdcfd3eDknXx9KzqdzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
